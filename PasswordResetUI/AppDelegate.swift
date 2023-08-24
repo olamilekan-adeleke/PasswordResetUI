@@ -5,6 +5,7 @@
 //  Created by Enigma Kod on 23/08/2023.
 //
 
+import IQKeyboardManagerSwift
 import UIKit
 
 @main
@@ -16,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBackground
         window?.rootViewController = ViewController()
+
+        IQKeyboardManager.shared.enable = true
 
         return true
     }
