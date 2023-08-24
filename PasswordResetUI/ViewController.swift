@@ -5,12 +5,15 @@
 //  Created by Enigma Kod on 23/08/2023.
 //
 
+import SwiftUI
 import UIKit
 
 class ViewController: UIViewController {
     let stackView = UIStackView()
-    let passwordTextField = PasswordTextFieldView(hintText: "New Password")
-    let passwordCriteriaView = PasswordCriteriaView(text: "uppercase letter (A-Z)")
+    let passwordTextField = PasswordTextFieldView(hintText: "New password")
+    let passwordStatusView = PasswordStatusView()
+    let confrimPasswordTextField = PasswordTextFieldView(hintText: "Re-eneter new password")
+    let resetButton = UIButton(type: .system)
 
     override func viewDidLoad() {
         style()
@@ -24,8 +27,21 @@ extension ViewController {
         stackView.spacing = 20
         stackView.axis = .vertical
 
-//        stackView.addArrangedSubview(passwordTextField)
-        stackView.addArrangedSubview(passwordCriteriaView)
+        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(passwordTextField)
+
+        passwordStatusView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(passwordStatusView)
+
+        confrimPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(confrimPasswordTextField)
+
+        resetButton.translatesAutoresizingMaskIntoConstraints = false
+        resetButton.configuration = UIButton.Configuration.filled()
+        resetButton.setTitle("Reset Password", for: [])
+        resetButton.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
+        stackView.addArrangedSubview(resetButton)
+
         view.addSubview(stackView)
     }
 
@@ -35,5 +51,25 @@ extension ViewController {
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: stackView.trailingAnchor, multiplier: 2),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
+    }
+}
+
+extension ViewController {
+    @objc private func resetButtonTapped() {}
+}
+
+// MARK: - Preview
+
+struct ViewControllerRepresentable: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> some UIViewController {
+        return ViewController()
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
+}
+
+struct ViewController_Preview: PreviewProvider {
+    static var previews: some View {
+        return PasswordTextFieldViewRepresentable()
     }
 }
