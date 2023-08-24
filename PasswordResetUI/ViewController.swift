@@ -9,6 +9,8 @@ import SwiftUI
 import UIKit
 
 class ViewController: UIViewController {
+    typealias CustomValidator = PasswordTextFieldView.CustomValidator
+
     let stackView = UIStackView()
     let passwordTextField = PasswordTextFieldView(hintText: "New password")
     let passwordStatusView = PasswordStatusView()
@@ -26,13 +28,15 @@ extension ViewController {
     private func setUp() {
         let dissmissKeyboardTap = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
         view.addGestureRecognizer(dissmissKeyboardTap)
+
+        setUpNewPasswordValidator()
     }
 
     @objc private func viewTapped() {
         view.endEditing(true)
     }
 
-    public func style() {
+    private func style() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 20
         stackView.axis = .vertical
@@ -56,12 +60,38 @@ extension ViewController {
         view.addSubview(stackView)
     }
 
-    public func layout() {
+    private func layout() {
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: stackView.trailingAnchor, multiplier: 2),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
+    }
+
+    private func setUpNewPasswordValidator() {
+        let newPasswordValidator: CustomValidator = { text in
+            guard let text = text, !text.isEmpty else {
+                self.passwordStatusView.reset()
+                return (false, "Enter your new password")
+            }
+
+            // Valid characters
+            let validChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,@:?!()$\\/#"
+            let invalidSet = CharacterSet(charactersIn: validChars).inverted
+            guard text.rangeOfCharacter(from: invalidSet) == nil else {
+                self.passwordStatusView.reset()
+                return (false, "Enter valid special chars (.,@:?!()$\\/#) with no spaces")
+            }
+
+            self.passwordStatusView.updateUI(text)
+            if !self.passwordStatusView.validate(text) {
+                return (false, "Your password must meet the requirements below")
+            }
+
+            return (true, "")
+        }
+
+        passwordTextField.customValidator = newPasswordValidator
     }
 }
 
@@ -69,13 +99,17 @@ extension ViewController: PasswordTextFieldDelegate {
     func editingChanged(_ sender: PasswordTextFieldView) {
         let text = sender.textField.text ?? ""
 
-        if sender == passwordTextField {
+        if sender === passwordTextField {
             passwordStatusView.updateUI(text)
         }
     }
 
     func didEndEditing(_ sender: PasswordTextFieldView) {
         print(sender.textField.text ?? "N/A")
+        if sender === passwordTextField {
+            self.passwordStatusView.shouldResetCriteria = false
+            _ = passwordTextField.validate()
+        }
     }
 }
 
