@@ -30,6 +30,7 @@ extension ViewController {
         view.addGestureRecognizer(dissmissKeyboardTap)
 
         setUpNewPasswordValidator()
+        setupConfirmPassword()
     }
 
     @objc private func viewTapped() {
@@ -42,7 +43,6 @@ extension ViewController {
         stackView.axis = .vertical
 
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        passwordTextField.delegate = self
         stackView.addArrangedSubview(passwordTextField)
 
         passwordStatusView.translatesAutoresizingMaskIntoConstraints = false
@@ -92,6 +92,24 @@ extension ViewController {
         }
 
         passwordTextField.customValidator = newPasswordValidator
+        passwordTextField.delegate = self
+    }
+
+    private func setupConfirmPassword() {
+        let confirmPasswordValidation: CustomValidator = { text in
+            guard let text = text, !text.isEmpty else {
+                return (false, "Enter your password.")
+            }
+
+            guard text == self.passwordTextField.text else {
+                return (false, "Passwords do not match.")
+            }
+
+            return (true, "")
+        }
+
+        confrimPasswordTextField.customValidator = confirmPasswordValidation
+        confrimPasswordTextField.delegate = self
     }
 }
 
@@ -107,8 +125,10 @@ extension ViewController: PasswordTextFieldDelegate {
     func didEndEditing(_ sender: PasswordTextFieldView) {
         print(sender.textField.text ?? "N/A")
         if sender === passwordTextField {
-            self.passwordStatusView.shouldResetCriteria = false
+            passwordStatusView.shouldResetCriteria = false
             _ = passwordTextField.validate()
+        } else if sender === confrimPasswordTextField {
+            _ = confrimPasswordTextField.validate()
         }
     }
 }
