@@ -8,6 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    let stackView = UIStackView()
     let passwordTextField = PasswordTextFieldView(hintText: "New Password")
 
     override func viewDidLoad() {
@@ -18,15 +19,19 @@ class ViewController: UIViewController {
 
 extension ViewController {
     public func style() {
-        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(passwordTextField)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 20
+        stackView.axis = .vertical
+
+        stackView.addArrangedSubview(passwordTextField)
+        view.addSubview(stackView)
     }
 
     public func layout() {
         NSLayoutConstraint.activate([
-            passwordTextField.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
-            view.trailingAnchor.constraint(equalToSystemSpacingAfter: passwordTextField.leadingAnchor, multiplier: 1),
-            passwordTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            stackView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: stackView.trailingAnchor, multiplier: 2),
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
 }

@@ -30,14 +30,14 @@ class PasswordTextFieldView: UIView {
     }
 
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: 250, height: 50)
+        return CGSize(width: 200, height: 60)
     }
 }
 
 extension PasswordTextFieldView {
     public func style() {
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .orange
+        // backgroundColor = .orange
 
         lockImageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(lockImageView)
@@ -47,7 +47,6 @@ extension PasswordTextFieldView {
         textField.placeholder = hintText
         textField.keyboardType = .asciiCapable
         // textField.delegate = self
-        textField.backgroundColor = .red
         textField.attributedPlaceholder = NSAttributedString(
             string: hintText,
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.secondaryLabel]
@@ -69,8 +68,10 @@ extension PasswordTextFieldView {
         errorLabel.textColor = UIColor.systemRed
         errorLabel.adjustsFontSizeToFitWidth = true
         errorLabel.minimumScaleFactor = 0.8
-        errorLabel.text = "Enter your password."
+        errorLabel.text = "Your password must meet the requirements below."
         errorLabel.isHidden = false
+        errorLabel.numberOfLines = 0
+        errorLabel.lineBreakMode = .byWordWrapping
         addSubview(errorLabel)
     }
 
