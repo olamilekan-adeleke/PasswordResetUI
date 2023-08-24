@@ -28,6 +28,7 @@ extension ViewController {
         stackView.axis = .vertical
 
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+        passwordTextField.delegate = self
         stackView.addArrangedSubview(passwordTextField)
 
         passwordStatusView.translatesAutoresizingMaskIntoConstraints = false
@@ -53,6 +54,18 @@ extension ViewController {
         ])
     }
 }
+
+extension ViewController: PasswordTextFieldDelegate {
+    func editingChanged(_ sender: PasswordTextFieldView) {
+        let text = sender.textField.text ?? ""
+
+        if sender == passwordTextField {
+            passwordStatusView.updateUI(text)
+        }
+    }
+}
+
+// MARK: - Action
 
 extension ViewController {
     @objc private func resetButtonTapped() {}
