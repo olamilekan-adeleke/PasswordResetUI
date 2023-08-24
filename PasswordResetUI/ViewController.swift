@@ -16,12 +16,22 @@ class ViewController: UIViewController {
     let resetButton = UIButton(type: .system)
 
     override func viewDidLoad() {
+        setUp()
         style()
         layout()
     }
 }
 
 extension ViewController {
+    private func setUp() {
+        let dissmissKeyboardTap = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        view.addGestureRecognizer(dissmissKeyboardTap)
+    }
+
+    @objc private func viewTapped() {
+        view.endEditing(true)
+    }
+
     public func style() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 20
@@ -62,6 +72,10 @@ extension ViewController: PasswordTextFieldDelegate {
         if sender == passwordTextField {
             passwordStatusView.updateUI(text)
         }
+    }
+
+    func didEndEditing(_ sender: PasswordTextFieldView) {
+        print(sender.textField.text ?? "N/A")
     }
 }
 

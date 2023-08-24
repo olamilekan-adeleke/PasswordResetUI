@@ -10,6 +10,8 @@ import UIKit
 
 protocol PasswordTextFieldDelegate: AnyObject {
     func editingChanged(_ sender: PasswordTextFieldView)
+
+    func didEndEditing(_ sender: PasswordTextFieldView)
 }
 
 class PasswordTextFieldView: UIView {
@@ -126,11 +128,11 @@ extension PasswordTextFieldView {
 
 extension PasswordTextFieldView: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print("User End Editing: -> \(textField.text)")
+        delegate?.didEndEditing(self)
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("User Typed Return Key: -> \(textField.text)")
+        print("User Typed Return Key: -> \(textField.text ?? "")")
         textField.endEditing(true)
         return true
     }
