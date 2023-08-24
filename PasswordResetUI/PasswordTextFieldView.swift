@@ -14,6 +14,7 @@ class PasswordTextFieldView: UIView {
     let hintText: String
     let eyeButton = UIButton(type: .custom)
     let dividerView = UIView()
+    let errorLabel = UILabel()
 
     init(hintText: String) {
         self.hintText = hintText
@@ -62,6 +63,15 @@ extension PasswordTextFieldView {
         dividerView.translatesAutoresizingMaskIntoConstraints = false
         dividerView.backgroundColor = UIColor.separator
         addSubview(dividerView)
+
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        errorLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
+        errorLabel.textColor = UIColor.systemRed
+        errorLabel.adjustsFontSizeToFitWidth = true
+        errorLabel.minimumScaleFactor = 0.8
+        errorLabel.text = "Enter your password."
+        errorLabel.isHidden = false
+        addSubview(errorLabel)
     }
 
     public func layout() {
@@ -95,6 +105,13 @@ extension PasswordTextFieldView {
             dividerView.heightAnchor.constraint(equalToConstant: 1),
             dividerView.leadingAnchor.constraint(equalTo: leadingAnchor),
             dividerView.trailingAnchor.constraint(equalTo: trailingAnchor),
+        ])
+
+        // Error Label
+        NSLayoutConstraint.activate([
+            errorLabel.topAnchor.constraint(equalTo: dividerView.bottomAnchor, constant: 4),
+            errorLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            errorLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
     }
 }

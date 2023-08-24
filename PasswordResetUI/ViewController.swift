@@ -24,7 +24,8 @@ extension ViewController {
 
     public func layout() {
         NSLayoutConstraint.activate([
-            passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            passwordTextField.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: passwordTextField.leadingAnchor, multiplier: 1),
             passwordTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
