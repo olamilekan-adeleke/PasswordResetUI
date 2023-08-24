@@ -12,6 +12,7 @@
 		39FA77352A96C4C400432AF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39FA77342A96C4C400432AF0 /* Assets.xcassets */; };
 		39FA77382A96C4C400432AF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39FA77362A96C4C400432AF0 /* LaunchScreen.storyboard */; };
 		39FA77412A96C76800432AF0 /* PasswordTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FA77402A96C76800432AF0 /* PasswordTextFieldView.swift */; };
+		39FA77462A96DE5A00432AF0 /* PasswordCriteriaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FA77452A96DE5A00432AF0 /* PasswordCriteriaView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		39FA77372A96C4C400432AF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39FA77392A96C4C400432AF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39FA77402A96C76800432AF0 /* PasswordTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextFieldView.swift; sourceTree = "<group>"; };
+		39FA77452A96DE5A00432AF0 /* PasswordCriteriaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordCriteriaView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,9 +56,10 @@
 		39FA772A2A96C4C200432AF0 /* PasswordResetUI */ = {
 			isa = PBXGroup;
 			children = (
+				39FA773F2A96C50E00432AF0 /* Files */,
+				39FA77442A96DE2E00432AF0 /* PasswordStatusView */,
 				39FA772B2A96C4C200432AF0 /* AppDelegate.swift */,
 				39FA772F2A96C4C200432AF0 /* ViewController.swift */,
-				39FA773F2A96C50E00432AF0 /* Files */,
 				39FA77402A96C76800432AF0 /* PasswordTextFieldView.swift */,
 			);
 			path = PasswordResetUI;
@@ -70,6 +73,14 @@
 				39FA77392A96C4C400432AF0 /* Info.plist */,
 			);
 			name = Files;
+			sourceTree = "<group>";
+		};
+		39FA77442A96DE2E00432AF0 /* PasswordStatusView */ = {
+			isa = PBXGroup;
+			children = (
+				39FA77452A96DE5A00432AF0 /* PasswordCriteriaView.swift */,
+			);
+			name = PasswordStatusView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,6 +156,7 @@
 				39FA77302A96C4C200432AF0 /* ViewController.swift in Sources */,
 				39FA77412A96C76800432AF0 /* PasswordTextFieldView.swift in Sources */,
 				39FA772C2A96C4C200432AF0 /* AppDelegate.swift in Sources */,
+				39FA77462A96DE5A00432AF0 /* PasswordCriteriaView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
