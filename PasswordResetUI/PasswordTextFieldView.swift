@@ -52,7 +52,7 @@ extension PasswordTextFieldView {
         textField.isSecureTextEntry = false
         textField.placeholder = hintText
         textField.keyboardType = .asciiCapable
-        // textField.delegate = self
+        textField.delegate = self
         textField.attributedPlaceholder = NSAttributedString(
             string: hintText,
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.secondaryLabel]
@@ -121,6 +121,18 @@ extension PasswordTextFieldView {
             errorLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             errorLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
+    }
+}
+
+extension PasswordTextFieldView: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("User End Editing: -> \(textField.text)")
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("User Typed Return Key: -> \(textField.text)")
+        textField.endEditing(true)
+        return true
     }
 }
 
