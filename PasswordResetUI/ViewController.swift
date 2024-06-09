@@ -154,3 +154,13 @@ struct ViewController_Preview: PreviewProvider {
         return PasswordTextFieldViewRepresentable()
     }
 }
+
+class FormData {
+    enum PasswordState { case invaild, vaild, tooShort }
+
+    var password: String = ""
+
+    var passWordState: PasswordState {
+        return PasswordState.tooShort
+    }
+}
